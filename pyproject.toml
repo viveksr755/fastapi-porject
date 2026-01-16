@@ -7,7 +7,11 @@ requires-python = ">=3.12"
 dependencies = [
     "dotenv>=0.9.9",
     "fastapi>=0.128.0",
+    "ipynb>=0.5.1",
     "jose>=1.0.0",
     "jwt>=1.4.0",
+    "pandas>=2.3.3",
+    "redis>=7.1.0",
+    "scikit-learn>=0.22.0",
     "uvicorn>=0.40.0",
 ]
