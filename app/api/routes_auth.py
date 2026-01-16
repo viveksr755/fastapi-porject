@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 from app.core.security import create_token
 
 
@@ -21,4 +21,7 @@ def login(auth:AuthInput):
         token=create_token({'sub':auth.username})
         return {'access_token': token}
     return {'error':'Invalid credentials'}
-    
+
+
+
+
