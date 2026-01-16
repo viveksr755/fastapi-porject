@@ -1,11 +1,13 @@
-FROM python:3.10
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
 WORKDIR /app
 
 COPY . .
 
-RUN pip install --no-cache-dir --upgrade pip && \ 
-    pip instal --no-cache-dir -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project
 
 
 CMD ["uvicorn", "app.main:app","--host","0.0.0.0","--port","8000"]
