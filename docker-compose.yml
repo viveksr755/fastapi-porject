@@ -3,14 +3,14 @@ version: '1.0'
 services:
   api:
     build: .
-    container_name: fast-api
+    container_name: fastapi-app
     ports:
       - "8000:8000"
 
     environment:
       - API_KEY=demo
       - JWT_SECRET_KEY=secret
-      - REDIS_URL=redis://localhost:6379
+      - REDIS_URL=redis://redis:6379
 
     depends_on:
       - redis
@@ -30,6 +30,8 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus1
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
     networks:
@@ -49,5 +51,4 @@ services:
 networks:
  backend:
   driver: bridge
-
 
